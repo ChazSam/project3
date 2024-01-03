@@ -1,7 +1,9 @@
 from models.__init__ import CURSOR,CONN
 
 class Member:
-    
+
+    all = {}
+
     def __init__(self, name, age, goals, id=None):
         self.name = name
         self.age = age
@@ -59,6 +61,23 @@ class Member:
 
         CURSOR.execute(sql)
         CONN.commit()
+
+
+    def save(self):
+        sql = """INSERT INTO members (name, age, goals)
+        VALUES (?, ?, ?)"""
+
+        CURSOR.execute(sql, (self.name, self.age, self.goals))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
+ 
+    @classmethod
+    def create(cls, name, age, goals):
+        member = cls(name, age, goals)
+        member.save()
+        return member
 
     def get_all(self):
         pass
