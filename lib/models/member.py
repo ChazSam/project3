@@ -4,10 +4,11 @@ class Member:
 
     all = {}
 
-    def __init__(self, name, age, goals, id=None):
+    def __init__(self, name, age, goals, trainer_id, id=None):
         self.name = name
         self.age = age
         self.goals = goals
+        self.trainer_id = trainer_id
         self.id = id
 
     @property
@@ -43,14 +44,24 @@ class Member:
         else:
             raise ValueError ("Please enter a goal")
         
+    @property
+    def trainer_id(self):
+        return self._trainer_id
+    
+    @trainer_id.setter
+    def trainer_id(self, trainer_id):
+        if isinstance(trainer_id, int):
+            self._trainer_id = trainer_id
+        else:
+            raise ValueError("check trainer id")
+        
     @classmethod
     def create_table(cls):
         sql ="""CREATE TABLE IF NOT EXISTS members(
         id INTERGER PRIMARY KEY,
         name TEXT,
         age INTEGER,
-        goals TEXT,
-        FOREIGN KEY (trainer_id) REFERENCES trainers(id))"""
+        goals TEXT)"""
 
         CURSOR.execute(sql)
         CONN.commit()
@@ -64,10 +75,10 @@ class Member:
 
 
     def save(self):
-        sql = """INSERT INTO members (name, age, goals)
-        VALUES (?, ?, ?)"""
+        sql = """INSERT INTO members (name, age, goals, trainer.id)
+        VALUES (?, ?, ?, ?)"""
 
-        CURSOR.execute(sql, (self.name, self.age, self.goals))
+        CURSOR.execute(sql, (self.name, self.age, self.goals, self.trainer_id))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
