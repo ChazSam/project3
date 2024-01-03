@@ -1,8 +1,10 @@
-from models.__init__ import CURSOR,CONN
+from models.__init__ import CURSOR, CONN
 
 class Trainer:
-    
-    def __init__(self, name, work_days, id=None):
+
+    all = {}
+
+    def __init__(self, name, work_days, id = None):
         self.name = name
         self.work_days = work_days
         self.id = id
@@ -35,6 +37,7 @@ class Trainer:
         id INTERGER PRIMARY KEY,
         name TEXT,
         work_days TEXT)"""
+
         CURSOR.execute(sql)
         CONN.commit()
 
@@ -47,9 +50,21 @@ class Trainer:
 
     def get_all(self):
         pass
+    
+    def save(self):
+        sql ="""INSERT INTO trainers (name, work_days)
+        VALUES (?,?)"""
 
-    def create(self):
-        pass
+        CURSOR.execute(sql, (self.name, self.work_days))
+        CONN.commit()
+        self.id =CURSOR.lastrowid
+        type(self).all[self.id] = self
+    
+    @classmethod
+    def create(cls, name, work_days):
+        trainer = cls(name,work_days)
+        trainer.save()
+        return trainer
 
     def delete(self):
         pass
