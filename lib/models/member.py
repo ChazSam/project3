@@ -4,12 +4,12 @@ class Member:
 
     all = {}
 
-    def __init__(self, name, age, goals, trainer_id, id=None):
+    def __init__(self, name, age, trainer_id, goals,  id = None):
+        self.id = id
         self.name = name
         self.age = age
         self.goals = goals
         self.trainer_id = trainer_id
-        self.id = id
 
     @property
     def name(self):
@@ -50,18 +50,20 @@ class Member:
     
     @trainer_id.setter
     def trainer_id(self, trainer_id):
-        if isinstance(trainer_id, int):
+        if type(trainer_id) is int:
             self._trainer_id = trainer_id
         else:
             raise ValueError("check trainer id")
         
     @classmethod
     def create_table(cls):
-        sql ="""CREATE TABLE IF NOT EXISTS members(
+        sql ="""CREATE TABLE IF NOT EXISTS members (
         id INTERGER PRIMARY KEY,
         name TEXT,
         age INTEGER,
-        goals TEXT)"""
+        goals TEXT,
+        trainer_id INTERGER,
+        FOREIGN KEY (trainer_id) REFERENCES trainers(id))"""
 
         CURSOR.execute(sql)
         CONN.commit()
@@ -75,8 +77,8 @@ class Member:
 
 
     def save(self):
-        sql = """INSERT INTO members (name, age, goals, trainer.id)
-        VALUES (?, ?, ?, ?)"""
+        sql = """INSERT INTO members (name, age, goals, trainer_id)
+                VALUES (?, ?, ?, ?)"""
 
         CURSOR.execute(sql, (self.name, self.age, self.goals, self.trainer_id))
         CONN.commit()
@@ -85,8 +87,8 @@ class Member:
         type(self).all[self.id] = self
  
     @classmethod
-    def create(cls, name, age, goals):
-        member = cls(name, age, goals)
+    def create(cls, name, age, goals, trainer_id):
+        member = cls(name, age, goals, trainer_id)
         member.save()
         return member
 

@@ -33,7 +33,7 @@ class Trainer:
     
     @classmethod
     def create_table(cls):
-        sql = """CREATE TABLE IF NOT EXISTS trainers(
+        sql = """CREATE TABLE IF NOT EXISTS trainers (
         id INTERGER PRIMARY KEY,
         name TEXT,
         work_days TEXT)"""
@@ -48,16 +48,15 @@ class Trainer:
         CURSOR.execute(sql)
         CONN.commit()
 
-    def get_all(self):
-        pass
-    
+
     def save(self):
         sql ="""INSERT INTO trainers (name, work_days)
         VALUES (?,?)"""
 
         CURSOR.execute(sql, (self.name, self.work_days))
         CONN.commit()
-        self.id =CURSOR.lastrowid
+
+        self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
     
     @classmethod
@@ -65,10 +64,44 @@ class Trainer:
         trainer = cls(name,work_days)
         trainer.save()
         return trainer
+    
+    def update(self):
+        sql = """UPDATE trainers
+        SET name = ?, location = ?
+        WHERE id = ?"""
+
+        CURSOR.execute(sql, (self.name, self.work_days, self.id))
+        CONN.commit()
 
     def delete(self):
+        sql = """DELETE FROM trainers
+        WHERE id = ?"""
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        del type (self).all[self.id]
+
+    def get_all(self):
         pass
 
+    def instance_from_db(cls, row):
+        trainer = cls.all.get(row[0])
+        if trainer:
+            trainer.name = row[1]
+            trainer.work_days = row[2]
+        else:
+            trainer = cls(row[1], row[2])
+            trainer.id = row[0]
+            cls.all[trainer.id] = trainer
+        return trainer
+    
+    def find_by_id(cls, id):
+        sql="""
+            SELECT * FROM trainers WHERE id = ? """
+        row = CURSOR.execute(sql, (id,)).fetchone
+        return cls.instance_from_db(row) if row else None
+    
     def change_work_days(self):
         pass
 
