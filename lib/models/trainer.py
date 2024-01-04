@@ -61,7 +61,7 @@ class Trainer:
     
     @classmethod
     def create(cls, name, work_days):
-        trainer = cls(name,work_days)
+        trainer = cls(name, work_days)
         trainer.save()
         return trainer
     
