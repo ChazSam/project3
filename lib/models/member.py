@@ -55,15 +55,26 @@ class Member:
         else:
             raise ValueError("check trainer id")
         
+    # @classmethod
+    # def create_table(cls):
+    #     sql ="""CREATE TABLE IF NOT EXISTS members (
+    #     id INTEGER PRIMARY KEY,
+    #     name TEXT,
+    #     age INTEGER,
+    #     goals TEXT,
+    #     trainer_id INTEGER,
+    #     FOREIGN KEY (trainer_id) REFERENCES trainers(id))"""
+
+    #     CURSOR.execute(sql)
+    #     CONN.commit()
+
     @classmethod
     def create_table(cls):
         sql ="""CREATE TABLE IF NOT EXISTS members (
-        id INTERGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         name TEXT,
         age INTEGER,
-        goals TEXT,
-        trainer_id INTERGER,
-        FOREIGN KEY (trainer_id) REFERENCES trainers(id))"""
+        goals TEXT)"""
 
         CURSOR.execute(sql)
         CONN.commit()
@@ -76,22 +87,38 @@ class Member:
         CONN.commit()
 
 
-    def save(self):
-        sql = """INSERT INTO members (name, age, goals, trainer_id)
-                VALUES (?, ?, ?, ?)"""
+    # def save(self):
+    #     sql = """INSERT INTO members (name, age, goals, trainer_id)
+    #             VALUES (?, ?, ?, ?)"""
 
-        CURSOR.execute(sql, (self.name, self.age, self.goals, self.trainer_id))
+    #     CURSOR.execute(sql, (self.name, self.age, self.goals, self.trainer_id))
+    #     CONN.commit()
+
+    #     self.id = CURSOR.lastrowid
+    #     type(self).all[self.id] = self
+ 
+    # @classmethod
+    # def create(cls, name, age, goals, trainer_id):
+    #     member = cls(name, age, goals, trainer_id)
+    #     member.save()
+    #     return member
+    
+    def save(self):
+        sql = """INSERT INTO members (name, age, goals)
+                VALUES (?, ?, ?)"""
+
+        CURSOR.execute(sql, (self.name, self.age, self.goals))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
  
     @classmethod
-    def create(cls, name, age, goals, trainer_id):
-        member = cls(name, age, goals, trainer_id)
+    def create(cls, name, age, goals):
+        member = cls(name, age, goals)
         member.save()
         return member
-
+    
     def get_all(self):
         pass
 

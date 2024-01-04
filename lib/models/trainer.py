@@ -34,7 +34,7 @@ class Trainer:
     @classmethod
     def create_table(cls):
         sql = """CREATE TABLE IF NOT EXISTS trainers (
-        id INTERGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         name TEXT,
         work_days TEXT)"""
 
