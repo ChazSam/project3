@@ -50,10 +50,9 @@ class Trainer:
 
 
     def save(self):
-        sql ="""INSERT INTO trainers (name, work_days)
-        VALUES (?,?)"""
+        sql ="""INSERT INTO trainers (name, work_days) VALUES (?,?)"""
 
-        CURSOR.execute(sql, (self.name, self.work_days, ))
+        CURSOR.execute(sql, (self.name, self.work_days ))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
@@ -74,17 +73,14 @@ class Trainer:
         CONN.commit()
 
     def delete(self):
-        sql = """DELETE FROM trainers
-        WHERE id = ?"""
+        sql = """ DELETE FROM trainers WHERE id = ? """
 
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
         del type (self).all[self.id]
 
-    def get_all(self):
-        pass
-
+    @classmethod
     def instance_from_db(cls, row):
         trainer = cls.all.get(row[0])
         if trainer:
@@ -95,10 +91,17 @@ class Trainer:
             trainer.id = row[0]
             cls.all[trainer.id] = trainer
         return trainer
+
+    @classmethod
+    def get_all(cls):
+        sql = """SELECT * FROM trainers"""
+
+        rows = CURSOR.execute(sql).fetchall()
+        return  [cls.instance_from_db(row) for row in rows]
     
     def find_by_id(cls, id):
-        sql="""
-            SELECT * FROM trainers WHERE id = ? """
+        sql="""SELECT * FROM trainers WHERE id = ? """
+
         row = CURSOR.execute(sql, (id,)).fetchone
         return cls.instance_from_db(row) if row else None
     

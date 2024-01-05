@@ -4,8 +4,8 @@ from models.trainer import Trainer
 
 def seed_database():
     Trainer.drop_table()
-    Trainer.create_table()
     Member.drop_table()
+    Trainer.create_table()
     Member.create_table()
 
     jeff = Trainer.create("Jeff Flexman", "M")

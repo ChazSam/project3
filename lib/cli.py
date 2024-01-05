@@ -1,16 +1,29 @@
-option = input("Welcome to Trainer App. Please enter a number for:\n" 
-      "1. List all trainers \n"
-      "2. Add a trainer\n"
-      "3. Select a trainer\n"
-      "4. Remove a trainer\n"
+from helpers import (
+      exit_program,
+      list_trainers
+)
 
-      "5. See all members\n"
-      "6. Add a member\n"
-      "7. Select a member\n"
-      "8. Remove a member"
+def main():
+      while True:
+            option = input("Welcome to Trainer App. Please enter a number for:\n" 
+            "1. List all trainers \n"
+            "2. Add a trainer\n"
+            "3. Select a trainer\n"
+            "4. Remove a trainer\n"
 
-      "0. Exit Program\n")
+            "5. See all members\n"
+            "6. Add a member\n"
+            "7. Select a member\n"
+            "8. Remove a member\n"
 
+            "0. Exit Program\n")
+            if option == "1":
+                  list_trainers()
+                  
+            else:
+                  exit_program()
+            breakpoint()      
+main()
 # trainer options- 2
 # enter name
 # enter work days

@@ -113,27 +113,27 @@ class Member:
   
         self.id = id
 
-    @property
-    def name(self):
-        return self._name
+    # @property
+    # def name(self):
+    #     return self._name
     
-    @name.setter
-    def name(self, name):
-        if isinstance(name, str) and len(name):
-            self._name = name
-        else:
-            raise ValueError ("Please enter a valid name")
+    # @name.setter
+    # def name(self, name):
+    #     if isinstance(name, str) and len(name):
+    #         self._name = name
+    #     else:
+    #         raise ValueError ("Please enter a valid name")
         
-    @property
-    def goals(self):
-        return self._goals
+    # @property
+    # def goals(self):
+    #     return self._goals
     
-    @goals.setter
-    def goals(self, goals):
-        if isinstance(goals, str):
-            self._goals = goals
-        else:
-            raise ValueError ("Please enter days with a single letter and commas (M,T,W,H,F,S)")
+    # @goals.setter
+    # def goals(self, goals):
+    #     if isinstance(goals, str):
+    #         self._goals = goals
+    #     else:
+    #         raise ValueError ("Please enter days with a single letter and commas (M,T,W,H,F,S)")
         
 
         
@@ -220,6 +220,7 @@ class Member:
     @classmethod
     def drop_table(cls):
         sql = """DROP TABLE IF EXISTS members"""
+
         CURSOR.execute(sql)
         CONN.commit()
 
@@ -239,8 +240,11 @@ class Member:
         member.save()
         return member
 
-    def get_all(self):
-        pass
+    def get_all(cls):
+        sql = """SELECT * FROM members"""
+
+        rows = CURSOR.execute(sql).fetchall()
+        return  [cls.instance_from_db(row) for row in rows]
 
     def create(self):
         pass
