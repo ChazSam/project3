@@ -53,7 +53,7 @@ class Trainer:
         sql ="""INSERT INTO trainers (name, work_days)
         VALUES (?,?)"""
 
-        CURSOR.execute(sql, (self.name, self.work_days))
+        CURSOR.execute(sql, (self.name, self.work_days, ))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
@@ -67,7 +67,7 @@ class Trainer:
     
     def update(self):
         sql = """UPDATE trainers
-        SET name = ?, location = ?
+        SET name = ?, work_days = ?
         WHERE id = ?"""
 
         CURSOR.execute(sql, (self.name, self.work_days, self.id))

@@ -9,7 +9,7 @@ def seed_database():
     Member.create_table()
 
     jeff = Trainer.create("Jeff Flexman", "M")
-    jeffe = Trainer.create("Jeffe Flexman", "M")
+    #jeffe = Trainer.create("Jeffe Flexman", "M", 1)
 
     steve = Member.create("Steve Limparm", "I want to have strong legs.")
     # Member.create("Jessie Flexie", 89, "I want to do one armed push ups.", jeff.id)
