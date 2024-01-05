@@ -107,33 +107,34 @@ class Member:
     #     pass
 
     def __init__(self, name, goals, id = None):
+        
         self.name = name
 
         self.goals = goals
   
         self.id = id
 
-    # @property
-    # def name(self):
-    #     return self._name
+    @property
+    def name(self):
+        return self._name
     
-    # @name.setter
-    # def name(self, name):
-    #     if isinstance(name, str) and len(name):
-    #         self._name = name
-    #     else:
-    #         raise ValueError ("Please enter a valid name")
+    @name.setter
+    def name(self, name):
+        if isinstance(name, str) and len(name):
+            self._name = name
+        else:
+            raise ValueError ("Please enter a valid name")
         
-    # @property
-    # def goals(self):
-    #     return self._goals
+    @property
+    def goals(self):
+        return self._goals
     
-    # @goals.setter
-    # def goals(self, goals):
-    #     if isinstance(goals, str):
-    #         self._goals = goals
-    #     else:
-    #         raise ValueError ("Please enter days with a single letter and commas (M,T,W,H,F,S)")
+    @goals.setter
+    def goals(self, goals):
+        if isinstance(goals, str):
+            self._goals = goals
+        else:
+            raise ValueError ("error")
         
 
         
@@ -239,15 +240,36 @@ class Member:
         member = cls(name, goals)
         member.save()
         return member
+    # def save(self):
+    #     sql ="""INSERT INTO members (name, work_days) VALUES (?,?)"""
 
+    #     CURSOR.execute(sql, (self.name, self.goals))
+    #     CONN.commit()
+
+    #     self.id = CURSOR.lastrowid
+    #     type(self).all[self.id] = self  
+
+    # @classmethod
+    # def create(cls, name, goals):
+    #     trainer = cls(name, goals)
+    #     trainer.save()
+    #     return trainer
+
+
+
+
+    @classmethod
+    def instance_from_db(cls):
+        pass
+    
+    @classmethod
     def get_all(cls):
         sql = """SELECT * FROM members"""
 
         rows = CURSOR.execute(sql).fetchall()
         return  [cls.instance_from_db(row) for row in rows]
 
-    def create(self):
-        pass
+
 
     def delete(self):
         pass

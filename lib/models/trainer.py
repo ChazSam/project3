@@ -52,7 +52,7 @@ class Trainer:
     def save(self):
         sql ="""INSERT INTO trainers (name, work_days) VALUES (?,?)"""
 
-        CURSOR.execute(sql, (self.name, self.work_days ))
+        CURSOR.execute(sql, (self.name, self.work_days))
         CONN.commit()
 
         self.id = CURSOR.lastrowid

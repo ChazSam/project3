@@ -22,7 +22,7 @@ def main():
                   
             else:
                   exit_program()
-            breakpoint()      
+                  
 main()
 # trainer options- 2
 # enter name
