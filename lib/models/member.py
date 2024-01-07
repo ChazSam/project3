@@ -4,7 +4,7 @@ class Member:
 
     all = {}
 
-    def __init__(self, name, age, goals, trainer_id, id = None):
+    def __init__(self, name, age, goals, trainer_id = None, id = None):
         self.name = name
         self.age = age
         self.goals = goals
@@ -50,7 +50,7 @@ class Member:
     
     @trainer_id.setter
     def trainer_id(self, trainer_id):
-        if type(trainer_id) is int:
+        if type(trainer_id) is int or trainer_id == None:
             self._trainer_id = trainer_id
         else:
             raise ValueError("check trainer id")
@@ -98,7 +98,14 @@ class Member:
         pass
 
     def delete(self):
-        pass
+        sql = """DELETE FROM trainers WHERE id = ?"""
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        del type(self).all[self.id]
+
+        self.id = None
 
     def update_goals(self):
         pass

@@ -17,11 +17,27 @@ def main():
             "8. Remove a member\n"
 
             "0. Exit Program\n")
+
+            if option == "0":
+                  exit_program()
             if option == "1":
                   list_trainers()
-                  
-            else:
+            if option == "2":
                   exit_program()
+            if option == "3":
+                  exit_program()
+            if option == "4":
+                  exit_program()
+            if option == "5":
+                  exit_program()
+            if option == "6":
+                  exit_program()
+            if option == "7":
+                  exit_program()
+            if option == "8":
+                  exit_program()
+            else:
+                  return "Please enter a valid number."
                   
 main()
 # trainer options- 2
