@@ -79,6 +79,7 @@ class Trainer:
         CONN.commit()
 
     def delete(self):
+        
         sql = """ DELETE FROM trainers WHERE id = ? """
 
         CURSOR.execute(sql, (self.id,))

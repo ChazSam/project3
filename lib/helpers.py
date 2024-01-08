@@ -16,20 +16,20 @@ def list_members():
 
 
 def create_trainer():
-    name = input("Enter a trainer's full name")
-    days = input("Enter the days the trainer is working")
+    name = input("Enter a trainer's full name: \n")
+    days = input("Enter the days the trainer is working: \n")
     try:
         trainer = Trainer.create(name, days)
-        print(f"{trainer} added to the database")
+        print(f"{trainer.name} added to the database")
     except Exception as exc:
         print(f"Error: {exc}")
 
 
 def create_member():
-    name = input("Enter a trainer's full name")
-    age = input("Enter the members age")
-    goals = input("Enter the members goals")
-    trainer = input("Enter trainer's name or 'None' ")
+    name = input("Enter a trainer's full name\n")
+    age = input("Enter the members age\n")
+    goals = input("Enter the members goals\n")
+    trainer = input("Enter trainer's name or 'None' \n")
     try:
         member = Member.create(name, age, goals, trainer)
         print(f"{member} added to the database")
@@ -54,3 +54,8 @@ def remove_member():
     else:
         print(f'Member {name} not found')
 
+def update_trainers():
+    pass
+
+def update_members():
+    pass
