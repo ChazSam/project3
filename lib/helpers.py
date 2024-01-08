@@ -38,9 +38,19 @@ def create_member():
         
 
 def remove_trainer():
-    pass
+    name = input("Enter trainers name you want to remove: ")
+    if trainer := Trainer.find_by_name(name):
+        trainer.delete(name)
+        print(f"Trainer {name} deleted")
+    else:
+        print(f'Trainer {name} not found')
 
 
 def remove_member():
-    pass
+    name = input("Enter member's name you want to remove: ")
+    if trainer := Member.find_by_name(name):
+        trainer.delete(name)
+        print(f"Member {name} removed")
+    else:
+        print(f'Member {name} not found')
 

@@ -106,7 +106,7 @@ class Member:
         CONN.commit()
 
     def delete(self):
-        sql = """DELETE FROM trainers WHERE id = ?"""
+        sql = """DELETE FROM members WHERE id = ?"""
 
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
@@ -114,9 +114,6 @@ class Member:
         del type(self).all[self.id]
 
         self.id = None
-
-    
-
 
     @classmethod
     def instance_from_db(cls, row):
@@ -135,6 +132,13 @@ class Member:
         sql="""SELECT * FROM members WHERE id = ? """
 
         row = CURSOR.execute(sql, (id,)).fetchone
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_name(cls, name):
+        sql= """SELECT * FROM members WHERE name is ?"""
+
+        row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
 
 
