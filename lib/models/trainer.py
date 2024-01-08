@@ -48,6 +48,12 @@ class Trainer:
         CURSOR.execute(sql)
         CONN.commit()
 
+    @classmethod
+    def get_all(cls):
+        sql = """SELECT * FROM trainers"""
+
+        rows = CURSOR.execute(sql).fetchall()
+        return  [cls.instance_from_db(row) for row in rows]
 
     def save(self):
         sql ="""INSERT INTO trainers (name, work_days) VALUES (?,?)"""
@@ -92,24 +98,10 @@ class Trainer:
             cls.all[trainer.id] = trainer
         return trainer
 
-    @classmethod
-    def get_all(cls):
-        sql = """SELECT * FROM trainers"""
-
-        rows = CURSOR.execute(sql).fetchall()
-        return  [cls.instance_from_db(row) for row in rows]
-    
+    @classmethod 
     def find_by_id(cls, id):
         sql="""SELECT * FROM trainers WHERE id = ? """
 
         row = CURSOR.execute(sql, (id,)).fetchone
         return cls.instance_from_db(row) if row else None
     
-    def change_work_days(self):
-        pass
-
-    def assign_member(self):
-        pass
-
-    def remove_member(self):
-        pass

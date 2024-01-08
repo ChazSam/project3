@@ -54,7 +54,7 @@ class Member:
             self._trainer_id = trainer_id
         else:
             raise ValueError("check trainer id")
-        
+    
     @classmethod
     def create_table(cls):
         sql = """CREATE TABLE IF NOT EXISTS members (
@@ -68,7 +68,6 @@ class Member:
         CURSOR.execute(sql)
         CONN.commit()
 
-
     @classmethod
     def drop_table(cls):
         sql = """DROP TABLE IF EXISTS members"""
@@ -76,10 +75,15 @@ class Member:
         CURSOR.execute(sql)
         CONN.commit()
 
+    @classmethod
+    def get_all(cls):
+        sql = """SELECT * FROM members"""
+
+        rows = CURSOR.execute(sql).fetchall()
+        return  [cls.instance_from_db(row) for row in rows]
 
     def save(self):
-        sql = """INSERT INTO members (name, age, goals, trainer_id)
-                VALUES (?, ?, ?, ?)"""
+        sql = """INSERT INTO members (name, age, goals, trainer_id) VALUES (?, ?, ?, ?)"""
 
         CURSOR.execute(sql, (self.name, self.age, self.goals, self.trainer_id))
         CONN.commit()
@@ -92,10 +96,14 @@ class Member:
         member = cls(name, age, goals, trainer_id)
         member.save()
         return member
-
     
-    def get_all(self):
-        pass
+    def update(self):
+        sql = """ UPDATE members
+        SET name = ?, age = ?, goals = ?, trainer_id = ?
+        WHERE id = ? """
+
+        CURSOR.execute(sql, (self.name, self.age, self.goals, self.trainer_id, self.id))
+        CONN.commit()
 
     def delete(self):
         sql = """DELETE FROM trainers WHERE id = ?"""
@@ -107,24 +115,26 @@ class Member:
 
         self.id = None
 
-    def update_goals(self):
-        pass
-
-    @classmethod
-    def instance_from_db(cls):
-        pass
     
+
+
     @classmethod
-    def get_all(cls):
-        sql = """SELECT * FROM members"""
+    def instance_from_db(cls, row):
+        member = cls.all.get(row[0])
+        if member:
+            member.name = row[1]
+            member.work_days = row[2]
+        else:
+            member = cls(row[1], row[2])
+            member.id = row[0]
+            cls.all[member.id] = member
+        return member
 
-        rows = CURSOR.execute(sql).fetchall()
-        return  [cls.instance_from_db(row) for row in rows]
+    @classmethod
+    def find_by_id(cls, id):
+        sql="""SELECT * FROM members WHERE id = ? """
+
+        row = CURSOR.execute(sql, (id,)).fetchone
+        return cls.instance_from_db(row) if row else None
 
 
-
-    def delete(self):
-        pass
-
-    def update_goals(self):
-        pass
