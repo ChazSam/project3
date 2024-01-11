@@ -28,10 +28,11 @@ class Member:
     
     @age.setter
     def age(self, age):
+        breakpoint()
         if isinstance(age, int) and age >= 18:
             self._age = age
         else:
-            raise ValueError ("Please enter a number - Members must be at least 18 years old")
+            raise ValueError ("Members must be at least 18 years old")
     
     @property
     def goals(self):
@@ -50,10 +51,10 @@ class Member:
     
     @trainer_id.setter
     def trainer_id(self, trainer_id):
-        if type(trainer_id) is int or trainer_id == None:
+        if isinstance(trainer_id, int):
             self._trainer_id = trainer_id
         else:
-            raise ValueError("check trainer id")
+            raise ValueError("Member must be assigned a trainer.")
     
     @classmethod
     def create_table(cls):
@@ -121,8 +122,10 @@ class Member:
         if member:
             member.name = row[1]
             member.work_days = row[2]
+            member.goals = row[3]
+            member.trainer_id = row[4]
         else:
-            member = cls(row[1], row[2])
+            member = cls(row[1], row[2], row[3], row[4])
             member.id = row[0]
             cls.all[member.id] = member
         return member
@@ -131,11 +134,12 @@ class Member:
     def find_by_id(cls, id):
         sql="""SELECT * FROM members WHERE id = ? """
 
-        row = CURSOR.execute(sql, (id,)).fetchone
+        row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
     
     @classmethod
     def find_by_name(cls, name):
+        breakpoint()
         sql= """SELECT * FROM members WHERE name is ?"""
 
         row = CURSOR.execute(sql, (name,)).fetchone()

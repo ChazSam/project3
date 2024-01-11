@@ -13,7 +13,7 @@ def seed_database():
 
     Member.create("Steve Limparm", 21, "I want to have strong legs.", jeff.id)
     Member.create("Jessie Flexie", 89, "I want to do one armed push ups.", lisa.id)
-    Member.create("Joey Jojo", 23, "I want to be taller", None)
+    Member.create("Joey Jojo", 23, "I want to be taller", lisa.id)
 
 
 seed_database()

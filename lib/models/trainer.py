@@ -79,13 +79,13 @@ class Trainer:
         CONN.commit()
 
     def delete(self):
-        
-        sql = """ DELETE FROM trainers WHERE id = ? """
 
+        sql = """ DELETE FROM trainers WHERE id = ? """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
-        del type (self).all[self.id]
+        del type(self).all[self.id]
+        self.id = None
 
     @classmethod
     def instance_from_db(cls, row):

@@ -8,12 +8,15 @@ def exit_program():
 
 def list_trainers():
     trainers = Trainer.get_all()
-    return [print(trainer.name, trainer.work_days) for trainer in trainers]
+    print("Trainers: ")
+    for i, trainer  in enumerate(trainers, start=1) :
+        print(f"{i}. {trainer.name} ")
 
 def list_members():
     members = Member.get_all()
-    return [print(member) for member in members]
-
+    print("Members: ")
+    for i, member  in enumerate(members, start=1) :
+        print(f"{i}. {member.name} ")
 
 def create_trainer():
     name = input("Enter a trainer's full name: \n")
@@ -27,20 +30,23 @@ def create_trainer():
 
 def create_member():
     name = input("Enter a trainer's full name\n")
-    age = input("Enter the members age\n")
+    age = int(input("Enter the members age\n"))
     goals = input("Enter the members goals\n")
-    trainer = input("Enter trainer's name or 'None' \n")
+    list_trainers()
+    trainer = int(input("enter a number to assign a trainer: \n"))
     try:
         member = Member.create(name, age, goals, trainer)
-        print(f"{member} added to the database")
+        print(f"{member.name} added to the database")
     except Exception as exc:
         print(f"Error: {exc}")
         
 
 def remove_trainer():
     name = input("Enter trainers name you want to remove: ")
+    #id_ = Trainer.find_by_name(name)
+    breakpoint()
     if trainer := Trainer.find_by_name(name):
-        trainer.delete(name)
+        trainer.delete()
         print(f"Trainer {name} deleted")
     else:
         print(f'Trainer {name} not found')
@@ -48,11 +54,13 @@ def remove_trainer():
 
 def remove_member():
     name = input("Enter member's name you want to remove: ")
-    if trainer := Member.find_by_name(name):
-        trainer.delete(name)
+    # breakpoint()
+    if member := Member.find_by_name(name):
+        member.delete()
         print(f"Member {name} removed")
     else:
         print(f'Member {name} not found')
+
 
 def update_trainers():
     pass

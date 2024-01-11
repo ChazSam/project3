@@ -17,6 +17,7 @@ def main():
             "2. Add a trainer\n"
             "3. Edit a trainer\n"
             "4. Remove a trainer\n"
+            
             "\n"
             "5. See all members\n"
             "6. Add a member\n"
@@ -45,8 +46,10 @@ def main():
                   remove_member()
             else:
                   return "Please enter a valid number."
-                  
-main()
+            
+if __name__ == "__main__":                  
+      main()
+
 # trainer options- 2 - done
 # enter name
 # enter work days
@@ -66,3 +69,5 @@ main()
 # enter goals
 # assign trainer
 # assign times
+      
+#
