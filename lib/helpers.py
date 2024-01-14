@@ -63,7 +63,11 @@ def remove_member():
 
 
 def update_trainers():
-    pass
+    list_trainers()
+
 
 def update_members():
-    pass
+    list_members()
+
+def select_trainer():
+    input("enter a number for a trainer or .")
