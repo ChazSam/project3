@@ -44,7 +44,7 @@ def trainer_option():
       elif option == "1":
             create_trainer()
       elif option == "2":
-            x()
+            update_trainer()
       elif option == "3":
             remove_trainer()
       elif option == "4":

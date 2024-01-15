@@ -65,16 +65,23 @@ def remove_member():
     else:
         print(f'Member not found')
 
-
-# def select_trainer():
-#     input("enter a number for a trainer")
-
 def update_trainer():
-    input("enter a number for a trainer")
+    list_trainers()
+    blank()
+    id_ = input("Enter member number to update: \n")
+    if trainer := Trainer.find_by_id(id_):
+        try:
+            name = input("Enter Trainer's Name: \n")
+            trainer.name = name
+            work_days = input("Enter work_days: \n")
+            trainer.work_days = work_days
+            trainer.update()
+            print(f"{trainer.name} updated")
+        except Exception as exc:
+            print(f"Error updating member: ", exc)
+    else:
+        print(f"Member not found")
 
-# def select_member():
-#     input("enter a number for a trainer")
-    
 def update_member():
     list_members()
     blank()
@@ -83,7 +90,7 @@ def update_member():
         try:
             name = input("Enter Members Name: \n")
             member.name = name
-            age = input("Enter Members Age: \n")
+            age = int(input("Enter Members Age: \n"))
             member.age = age
             goals = input("Enter the members goals\n")
             member.goals = goals
