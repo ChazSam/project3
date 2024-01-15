@@ -6,17 +6,17 @@ from helpers import (
       create_member,
       remove_trainer,
       remove_member,
-      update_trainers,
-      update_members
+      update_trainer,
+      update_member,
+      blank
 )
 
 def main():
       while True:
-            option = input("Welcome to Trainer App. Please enter a number for:\n" 
+            option = input("Welcome to Trainer App. Please enter a number for:\n\n" 
             "1. Select Trainers \n"
             "2. Select Members\n"
-            "0. Quit\n"
-)
+            "0. Quit\n")
 
             if option == "0":
                   exit_program()
@@ -24,39 +24,27 @@ def main():
                   trainer_option()
             elif option == "2":
                   member_options()
-
-
-            # if option == "3":
-            #       exit_program()
-            # if option == "4":
-            #       remove_trainer()
-            # if option == "5":
-            #       list_members()
-            # if option == "6":
-            #       create_member()
-            # if option == "7":
-            #       exit_program()
-            # if option == "8":
-            #       remove_member()
             else:
                   return "Please enter a valid number."
             
 
 def trainer_option():
-      #list_trainers()
+      list_trainers()
+      blank()
+      print(" ")
       option = input("Enter what you would like to do: \n"
                         "1. Add Trainer \n"
                         "2. Update Trainer \n"
                         "3. Remove Trainer \n"
                         "4. Assign Trainer to a Member without a Trainer \n"
-                        "0. Back")
+                        "0. Back\n")
 
       if option == "0":
             main()
       elif option == "1":
             create_trainer()
       elif option == "2":
-            pass
+            x()
       elif option == "3":
             remove_trainer()
       elif option == "4":
@@ -66,26 +54,34 @@ def trainer_option():
             
 def member_options():
       list_members()
+      blank()
       option = input("Enter what you would like to do: \n"
                         "1. Add Member \n"
                         "2. Update Member \n"
                         "3. Remove Member \n"
                         "4. List Members with Trainers \n"
-                        "0. Back")
+                        "0. Back \n")
 
       if option == "0":
             main()
       elif option == "1":
             create_member()
       elif option == "2":
-            pass
+            update_member()
       elif option == "3":
             remove_member()
       elif option == "4":
             pass
       else:
-                  return("Please enter a valid number. \n")
+            return("Please enter a valid number. \n")
       
+def x():
+      pass
+
+def y():
+      pass
+
+
 
 if __name__ == "__main__":                  
       main()

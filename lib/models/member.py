@@ -28,7 +28,7 @@ class Member:
     
     @age.setter
     def age(self, age):
-        breakpoint()
+        #breakpoint()
         if isinstance(age, int) and age >= 18:
             self._age = age
         else:
@@ -107,6 +107,7 @@ class Member:
         CONN.commit()
 
     def delete(self):
+        breakpoint()
         sql = """DELETE FROM members WHERE id = ?"""
 
         CURSOR.execute(sql, (self.id,))
@@ -121,7 +122,7 @@ class Member:
         member = cls.all.get(row[0])
         if member:
             member.name = row[1]
-            member.work_days = row[2]
+            member.age = row[2]
             member.goals = row[3]
             member.trainer_id = row[4]
         else:
@@ -132,6 +133,7 @@ class Member:
 
     @classmethod
     def find_by_id(cls, id):
+        #breakpoint()
         sql="""SELECT * FROM members WHERE id = ? """
 
         row = CURSOR.execute(sql, (id,)).fetchone()
@@ -139,7 +141,7 @@ class Member:
     
     @classmethod
     def find_by_name(cls, name):
-        breakpoint()
+        #breakpoint()
         sql= """SELECT * FROM members WHERE name is ?"""
 
         row = CURSOR.execute(sql, (name,)).fetchone()

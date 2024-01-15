@@ -42,32 +42,61 @@ def create_member():
         
 
 def remove_trainer():
-    name = input("Enter trainers name you want to remove: ")
+    list_trainers()
+    blank()
+    id_ = int(input("Enter trainers number you want to remove: "))
     #id_ = Trainer.find_by_name(name)
-    breakpoint()
-    if trainer := Trainer.find_by_name(name):
+    #breakpoint()
+    if trainer := Trainer.find_by_id(id_):
         trainer.delete()
-        print(f"Trainer {name} deleted")
+        print(f"Trainer deleted")
     else:
-        print(f'Trainer {name} not found')
+        print(f'Trainer not found')
 
 
 def remove_member():
-    name = input("Enter member's name you want to remove: ")
-    # breakpoint()
-    if member := Member.find_by_name(name):
-        member.delete()
-        print(f"Member {name} removed")
-    else:
-        print(f'Member {name} not found')
-
-
-def update_trainers():
-    list_trainers()
-
-
-def update_members():
     list_members()
+    blank()
+    id_ = int(input("Enter member's number you want to remove: "))
+    # breakpoint()
+    if member := Member.find_by_id(id_):
+        member.delete()
+        print(f"Member removed")
+    else:
+        print(f'Member not found')
 
-def select_trainer():
-    input("enter a number for a trainer or .")
+
+# def select_trainer():
+#     input("enter a number for a trainer")
+
+def update_trainer():
+    input("enter a number for a trainer")
+
+# def select_member():
+#     input("enter a number for a trainer")
+    
+def update_member():
+    list_members()
+    blank()
+    id_ = input("Enter member number to update: \n")
+    if member := Member.find_by_id(id_):
+        try:
+            name = input("Enter Members Name: \n")
+            member.name = name
+            age = input("Enter Members Age: \n")
+            member.age = age
+            goals = input("Enter the members goals\n")
+            member.goals = goals
+            list_trainers()
+            trainer = int(input("enter a number to assign a trainer: \n"))
+            member.trainer_id = trainer
+            member.update()
+            print(f"{member.name} updated")
+        except Exception as exc:
+            print(f"Error updating member: ", exc)
+    else:
+        print(f"Member not found")
+
+
+def blank():
+      print(" ")
