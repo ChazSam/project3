@@ -1,10 +1,10 @@
-from models.__init__ import CURSOR,CONN
+from models.__init__ import CURSOR, CONN
 
 class Member:
 
     all = {}
 
-    def __init__(self, name, age, goals, trainer_id = None, id = None):
+    def __init__(self, name, age, goals, trainer_id, id = None):
         self.name = name
         self.age = age
         self.goals = goals
@@ -28,7 +28,6 @@ class Member:
     
     @age.setter
     def age(self, age):
-        #breakpoint()
         if isinstance(age, int) and age >= 18:
             self._age = age
         else:
@@ -114,7 +113,6 @@ class Member:
         CONN.commit()
 
         del type(self).all[self.id]
-
         self.id = None
 
     @classmethod
@@ -133,7 +131,6 @@ class Member:
 
     @classmethod
     def find_by_id(cls, id):
-        #breakpoint()
         sql="""SELECT * FROM members WHERE id = ? """
 
         row = CURSOR.execute(sql, (id,)).fetchone()
@@ -141,7 +138,6 @@ class Member:
     
     @classmethod
     def find_by_name(cls, name):
-        #breakpoint()
         sql= """SELECT * FROM members WHERE name is ?"""
 
         row = CURSOR.execute(sql, (name,)).fetchone()

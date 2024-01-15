@@ -32,12 +32,10 @@ def main():
 def trainer_option():
       list_trainers()
       blank()
-      print(" ")
       option = input("Enter what you would like to do: \n"
                         "1. Add Trainer \n"
                         "2. Update Trainer \n"
                         "3. Remove Trainer \n"
-                        "4. Assign Trainer to a Member without a Trainer \n"
                         "0. Back\n")
 
       if option == "0":

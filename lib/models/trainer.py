@@ -48,8 +48,6 @@ class Trainer:
         CURSOR.execute(sql)
         CONN.commit()
 
-
-
     def save(self):
         sql ="""INSERT INTO trainers (name, work_days) VALUES (?,?)"""
 
@@ -74,7 +72,6 @@ class Trainer:
         CONN.commit()
 
     def delete(self):
-        #breakpoint()
         sql = """ DELETE FROM trainers WHERE id = ? """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()

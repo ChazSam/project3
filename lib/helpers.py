@@ -5,7 +5,6 @@ def exit_program():
     print("Goodbye")
     exit()
 
-
 def list_trainers():
     trainers = Trainer.get_all()
     print("Trainers: ")
@@ -27,7 +26,6 @@ def create_trainer():
     except Exception as exc:
         print(f"Error: {exc}")
 
-
 def create_member():
     name = input("Enter a trainer's full name\n")
     age = int(input("Enter the members age\n"))
@@ -40,7 +38,6 @@ def create_member():
     except Exception as exc:
         print(f"Error: {exc}")
         
-
 def remove_trainer():
     list_trainers()
     blank()
@@ -50,7 +47,6 @@ def remove_trainer():
         print(f"Trainer deleted")
     else:
         print(f'Trainer not found')
-
 
 def remove_member():
     list_members()
