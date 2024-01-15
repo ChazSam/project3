@@ -26,7 +26,7 @@ def main():
             elif option == "2":
                   member_options()
             else:
-                  return "Please enter a valid number."
+                  print("Please enter a valid number.") 
             
 
 def trainer_option():
@@ -46,10 +46,10 @@ def trainer_option():
             update_trainer()
       elif option == "3":
             remove_trainer()
-      elif option == "4":
-            pass
+      # elif option == "4":
+      #       pass
       else:
-            return("Please enter a valid number. \n")
+            print("Please enter a valid number. \n")
             
 def member_options():
       list_members()
@@ -72,7 +72,7 @@ def member_options():
       elif option == "4":
             list_members_and_trainers()
       else:
-            return("Please enter a valid number. \n")
+            print("Please enter a valid number. \n")
       
 
 if __name__ == "__main__":                  

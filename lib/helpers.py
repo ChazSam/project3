@@ -19,16 +19,16 @@ def list_members():
 
 def create_trainer():
     name = input("Enter a trainer's full name: \n")
-    days = input("Enter the days the trainer is working: \n")
+    days = (input("Enter the days the trainer is working (enter MTWHFSU, no spaces): \n"))
     try:
-        trainer = Trainer.create(name, days)
+        trainer = Trainer.create(name, days.upper())
         print(f"{trainer.name} added to the database")
     except Exception as exc:
         print(f"Error: {exc}")
 
 def create_member():
     name = input("Enter a trainer's full name\n")
-    age = int(input("Enter the members age\n"))
+    age = int(input("Enter the members age (members must be 18+)\n"))
     goals = input("Enter the members goals\n")
     list_trainers()
     trainer = int(input("enter a number to assign a trainer: \n"))
