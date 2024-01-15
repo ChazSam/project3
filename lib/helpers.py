@@ -45,8 +45,6 @@ def remove_trainer():
     list_trainers()
     blank()
     id_ = int(input("Enter trainers number you want to remove: "))
-    #id_ = Trainer.find_by_name(name)
-    #breakpoint()
     if trainer := Trainer.find_by_id(id_):
         trainer.delete()
         print(f"Trainer deleted")
@@ -58,7 +56,6 @@ def remove_member():
     list_members()
     blank()
     id_ = int(input("Enter member's number you want to remove: "))
-    # breakpoint()
     if member := Member.find_by_id(id_):
         member.delete()
         print(f"Member removed")
@@ -104,6 +101,11 @@ def update_member():
     else:
         print(f"Member not found")
 
+def list_members_and_trainers(): 
+    members = Member.get_all()
+    for i, member  in enumerate(members, start=1):
+        trainer = Trainer.find_by_id(member.trainer_id)
+        print(f"{i}. {member.name} - Trainer: {trainer.name}")
 
 def blank():
       print(" ")

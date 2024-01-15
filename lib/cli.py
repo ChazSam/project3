@@ -8,6 +8,7 @@ from helpers import (
       remove_member,
       update_trainer,
       update_member,
+      list_members_and_trainers,
       blank
 )
 
@@ -71,78 +72,10 @@ def member_options():
       elif option == "3":
             remove_member()
       elif option == "4":
-            pass
+            list_members_and_trainers()
       else:
             return("Please enter a valid number. \n")
       
-def x():
-      pass
-
-def y():
-      pass
-
-
 
 if __name__ == "__main__":                  
       main()
-
-
-"""
-Welcome to the trainer app
-
-Press 1 for trainers status
-press 2 for members status
-Press Q to quit
-
-
-1 - trainers
-
-List trainers()
-What would you like to do?
-add trainer
-update trainer
-List trainer()
-      update name
-      update workday
-            x has an training day with y, would you like to continue?
-      update all
-remove trainer
-      x has an training day with y, would you like to continue?
-assign member to trainer
-back
-
-2 - members
-List Members()
-What would you like to do?
-add member
-      add_member()
-assign member to trainer
-update member
-delete member
-      remove_member()
-list members assigned to trainers
-back
-"""
-
-
-# trainer options- 2 - done
-# enter name
-# enter work days
-# assign member
-# assign times with member
-
-# edit trainer - 3
-# Change name
-# change work days
-# see assigned members
-# assign member
-# assign times with member
-
-# add member options - 6
-# enter name
-# enter age
-# enter goals
-# assign trainer
-# assign times
-      
-#
