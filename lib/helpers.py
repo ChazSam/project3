@@ -28,10 +28,17 @@ def create_trainer():
 
 def create_member():
     name = input("Enter a trainer's full name\n")
-    age = int(input("Enter the members age (members must be 18+)\n"))
+    try:
+        age = int(input("Enter the members age (members must be 18+)\n"))
+    except ValueError:
+            print("Please enter a number.")
     goals = input("Enter the members goals\n")
     list_trainers()
-    trainer = int(input("enter a number to assign a trainer: \n"))
+    try:
+        trainer = int(input("enter a number to assign a trainer: \n"))
+    except ValueError:
+        print("Please enter a number.")
+
     try:
         member = Member.create(name, age, goals, trainer)
         print(f"{member.name} added to the database")
@@ -41,7 +48,10 @@ def create_member():
 def remove_trainer():
     list_trainers()
     blank()
-    id_ = int(input("Enter trainers number you want to remove: "))
+    try:
+        id_ = int(input("Enter trainers number you want to remove: "))
+    except ValueError:
+        print("Please enter a number.")
     if trainer := Trainer.find_by_id(id_):
         trainer.delete()
         print(f"Trainer deleted")
@@ -51,7 +61,10 @@ def remove_trainer():
 def remove_member():
     list_members()
     blank()
-    id_ = int(input("Enter member's number you want to remove: "))
+    try:
+        id_ = int(input("Enter member's number you want to remove: "))
+    except ValueError:
+        print("Please enter a number.")
     if member := Member.find_by_id(id_):
         member.delete()
         print(f"Member removed")
@@ -83,12 +96,18 @@ def update_member():
         try:
             name = input("Enter Members Name: \n")
             member.name = name
-            age = int(input("Enter Members Age: \n"))
+            try:
+                age = int(input("Enter Members Age: \n"))
+            except ValueError:
+                print("Please enter a number.")
             member.age = age
             goals = input("Enter the members goals\n")
             member.goals = goals
             list_trainers()
-            trainer = int(input("enter a number to assign a trainer: \n"))
+            try:
+                trainer = int(input("enter a number to assign a trainer: \n"))
+            except ValueError:
+                print("Please enter a number.")
             member.trainer_id = trainer
             member.update()
             print(f"{member.name} updated")

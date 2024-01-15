@@ -30,50 +30,50 @@ def main():
             
 
 def trainer_option():
-      list_trainers()
-      blank()
-      option = input("Enter what you would like to do: \n"
-                        "1. Add Trainer \n"
-                        "2. Update Trainer \n"
-                        "3. Remove Trainer \n"
-                        "0. Back\n")
+      while True:
+            list_trainers()
+            blank()
+            option = input("Enter what you would like to do: \n"
+                              "1. Add Trainer \n"
+                              "2. Update Trainer \n"
+                              "3. Remove Trainer \n"
+                              "0. Back\n")
 
-      if option == "0":
-            main()
-      elif option == "1":
-            create_trainer()
-      elif option == "2":
-            update_trainer()
-      elif option == "3":
-            remove_trainer()
-      # elif option == "4":
-      #       pass
-      else:
-            print("Please enter a valid number. \n")
+            if option == "0":
+                  main()
+            elif option == "1":
+                  create_trainer()
+            elif option == "2":
+                  update_trainer()
+            elif option == "3":
+                  remove_trainer()
+            else:
+                  print("Please enter a valid number. \n")
             
 def member_options():
-      list_members()
-      blank()
-      option = input("Enter what you would like to do: \n"
-                        "1. Add Member \n"
-                        "2. Update Member \n"
-                        "3. Remove Member \n"
-                        "4. List Members with Trainers \n"
-                        "0. Back \n")
+      while True:
+            list_members()
+            blank()
+            option = input("Enter what you would like to do: \n"
+                              "1. Add Member \n"
+                              "2. Update Member \n"
+                              "3. Remove Member \n"
+                              "4. List Members with Trainers \n"
+                              "0. Back \n")
 
-      if option == "0":
-            main()
-      elif option == "1":
-            create_member()
-      elif option == "2":
-            update_member()
-      elif option == "3":
-            remove_member()
-      elif option == "4":
-            list_members_and_trainers()
-      else:
-            print("Please enter a valid number. \n")
-      
+            if option == "0":
+                  main()
+            elif option == "1":
+                  create_member()
+            elif option == "2":
+                  update_member()
+            elif option == "3":
+                  remove_member()
+            elif option == "4":
+                  list_members_and_trainers()
+            else:
+                  print("Please enter a valid number. \n")
+            
 
 if __name__ == "__main__":                  
       main()
