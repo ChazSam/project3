@@ -53,7 +53,9 @@ def remove_trainer():
     except ValueError:
         print("Please enter a number.")
     if trainer := Trainer.find_by_id(id_):
-        trainer.delete()
+        reassign_Members(trainer)
+
+        #trainer.delete()
         print(f"Trainer deleted")
     else:
         print(f'Trainer not found')
@@ -121,6 +123,26 @@ def list_members_and_trainers():
     for i, member  in enumerate(members, start=1):
         trainer = Trainer.find_by_id(member.trainer_id)
         print(f"{i}. {member.name} - Trainer: {trainer.name}")
+
+def reassign_Members(trainer):
+    x = trainer.members()
+    for i in x:
+        print(f"{i.name} is assigned to {trainer.name}, Please reassign the member to another trainer.")
+        trainer_list = Trainer.get_all()
+
+        [print(f"{t.id}. {t.name}") for t in trainer_list if t.name != trainer.name]
+
+        choice = int(input("Select which trainer to replace the previous \n"))
+
+        breakpoint()
+        for y in trainer_list:
+            if choice in y.id and choice == trainer.id:
+                i.trainer_id = choice
+                i.update()
+                print("Member updated")
+            else:
+                print ("Trainer does not exist")
+
 
 def blank():
       print(" ")

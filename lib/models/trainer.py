@@ -112,3 +112,13 @@ class Trainer:
 
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    def members(self):
+        from models.member import Member
+        sql = """SELECT * FROM members WHERE trainer_id = ?"""
+
+        CURSOR.execute(sql,(self.id,),)
+        
+        rows = CURSOR.fetchall()
+
+        return[ Member.instance_from_db(row) for row in rows ]
