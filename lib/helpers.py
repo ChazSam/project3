@@ -19,7 +19,7 @@ def list_members():
 
 def create_trainer():
     name = input("Enter a trainer's full name: \n")
-    days = (input("Enter the days the trainer is working (enter MTWHFSU, no spaces): \n"))
+    days = input("Enter the days the trainer is working (enter MTWHFSU, no spaces): \n")
     try:
         trainer = Trainer.create(name, days.upper())
         print(f"{trainer.name} added to the database")
@@ -27,7 +27,9 @@ def create_trainer():
         print(f"Error: {exc}")
 
 def create_member():
-    name = input("Enter a trainer's full name\n")
+    
+    name = input("Enter a Members's full name\n")
+
     try:
         age = int(input("Enter the members age (members must be 18+)\n"))
     except ValueError:
@@ -134,14 +136,14 @@ def reassign_Members(trainer):
 
         choice = int(input("Select which trainer to replace the previous \n"))
 
-        breakpoint()
-        for y in trainer_list:
-            if choice in y.id and choice == trainer.id:
+        for y in trainer_list:        
+            if choice == y.id:
                 i.trainer_id = choice
                 i.update()
-                print("Member updated")
-            else:
-                print ("Trainer does not exist")
+                print("Member's trainer updated")
+                break
+        else:
+            print ("Trainer does not exist")
 
 
 def blank():
