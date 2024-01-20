@@ -151,6 +151,8 @@ def trainer_info():
 
     choice = int(input("Select a trainer for all info: \n"))
     selected_trainer = trainers[choice-1]
+
+
     get_members = selected_trainer.members()
 
     print(f"Trainer: \n"
@@ -160,7 +162,16 @@ def trainer_info():
     blank()
 
 def member_info():
-        pass
+    members = Member.get_all()
+    for i, member in enumerate(members, start=1) :
+        print(f"{i}. {member.name} ")
+
+    choice = int(input("Select a trainer for all info: \n"))
+    selected_member = members[choice-1]
+    get_trainer = Trainer.find_by_id(selected_member.trainer_id)
+
+    print(f"{selected_member.name} {selected_member.age} {selected_member.goals}\nTrainer - {get_trainer.name}")
+    blank()
 
 def blank():
       print(" ")
