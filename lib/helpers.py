@@ -5,17 +5,20 @@ def exit_program():
     print("Goodbye")
     exit()
 
+
 def list_trainers():
     trainers = Trainer.get_all()
     print("Trainers: ")
     for i, trainer in enumerate(trainers, start=1) :
         print(f"{i}. {trainer.name} ")
 
+
 def list_members():
     members = Member.get_all()
     print("Members: ")
     for i, member in enumerate(members, start=1) :
         print(f"{i}. {member.name} ")
+
 
 def create_trainer():
     name = input("Enter a trainer's full name: \n")
@@ -25,6 +28,7 @@ def create_trainer():
         print(f"{trainer.name} added to the database")
     except Exception as exc:
         print(f"Error: {exc}")
+
 
 def create_member():
     name = input("Enter a Members's full name\n")
@@ -45,6 +49,7 @@ def create_member():
     except Exception as exc:
         print(f"Error: {exc}")
         
+
 def remove_trainer():
     list_trainers()
     blank()
@@ -60,6 +65,7 @@ def remove_trainer():
     else:
         print(f'Trainer not found')
 
+
 def remove_member():
     list_members()
     blank()
@@ -72,6 +78,7 @@ def remove_member():
         print(f"Member removed")
     else:
         print(f'Member not found')
+
 
 def update_trainer():
     list_trainers()
@@ -89,6 +96,7 @@ def update_trainer():
             print(f"Error updating member: ", exc)
     else:
         print(f"Member not found")
+
 
 def update_member():
     list_members()
@@ -118,6 +126,7 @@ def update_member():
     else:
         print(f"Member not found")
 
+
 def list_members_and_trainers(): 
     members = Member.get_all()
     for i, member  in enumerate(members, start=1):
@@ -126,8 +135,8 @@ def list_members_and_trainers():
 
 
 def reassign_Members(trainer):
-    x = trainer.members()
-    for i in x:
+    get_members = trainer.members()
+    for i in get_members:
         print(f"{i.name} is assigned to {trainer.name}, Please reassign the member to another trainer.")
         trainer_list = Trainer.get_all()
 
@@ -144,15 +153,17 @@ def reassign_Members(trainer):
         else:
             print ("Trainer does not exist")
 
+
 def trainer_info():
     trainers = Trainer.get_all()
     for i, trainer in enumerate(trainers, start=1) :
         print(f"{i}. {trainer.name} ")
+    try:
+        choice = int(input("Select a trainer for all info: \n"))
+    except ValueError:
+        print("Please enter a number.")
 
-    choice = int(input("Select a trainer for all info: \n"))
     selected_trainer = trainers[choice-1]
-
-
     get_members = selected_trainer.members()
 
     print(f"Trainer: \n"
@@ -161,17 +172,23 @@ def trainer_info():
     [print(m.name) for m in get_members]
     blank()
 
+
 def member_info():
     members = Member.get_all()
     for i, member in enumerate(members, start=1) :
         print(f"{i}. {member.name} ")
 
-    choice = int(input("Select a trainer for all info: \n"))
+    try:
+        choice = int(input("Select a trainer for all info: \n"))
+    except ValueError:
+        print("Please enter a number.")
+
     selected_member = members[choice-1]
     get_trainer = Trainer.find_by_id(selected_member.trainer_id)
 
     print(f"{selected_member.name} {selected_member.age} {selected_member.goals}\nTrainer - {get_trainer.name}")
     blank()
+
 
 def blank():
       print(" ")
