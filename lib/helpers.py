@@ -8,13 +8,13 @@ def exit_program():
 def list_trainers():
     trainers = Trainer.get_all()
     print("Trainers: ")
-    for i, trainer  in enumerate(trainers, start=1) :
+    for i, trainer in enumerate(trainers, start=1) :
         print(f"{i}. {trainer.name} ")
 
 def list_members():
     members = Member.get_all()
     print("Members: ")
-    for i, member  in enumerate(members, start=1) :
+    for i, member in enumerate(members, start=1) :
         print(f"{i}. {member.name} ")
 
 def create_trainer():
@@ -27,9 +27,7 @@ def create_trainer():
         print(f"Error: {exc}")
 
 def create_member():
-    
     name = input("Enter a Members's full name\n")
-
     try:
         age = int(input("Enter the members age (members must be 18+)\n"))
     except ValueError:
@@ -57,7 +55,7 @@ def remove_trainer():
     if trainer := Trainer.find_by_id(id_):
         reassign_Members(trainer)
 
-        #trainer.delete()
+        trainer.delete()
         print(f"Trainer deleted")
     else:
         print(f'Trainer not found')
@@ -126,6 +124,7 @@ def list_members_and_trainers():
         trainer = Trainer.find_by_id(member.trainer_id)
         print(f"{i}. {member.name} - Trainer: {trainer.name}")
 
+
 def reassign_Members(trainer):
     x = trainer.members()
     for i in x:
@@ -145,6 +144,23 @@ def reassign_Members(trainer):
         else:
             print ("Trainer does not exist")
 
+def trainer_info():
+    trainers = Trainer.get_all()
+    for i, trainer in enumerate(trainers, start=1) :
+        print(f"{i}. {trainer.name} ")
+
+    choice = int(input("Select a trainer for all info: \n"))
+    selected_trainer = trainers[choice-1]
+    get_members = selected_trainer.members()
+
+    print(f"Trainer: \n"
+          f"{selected_trainer.name}  Work days - {selected_trainer.work_days} \n"
+          "Assigned Members: ")
+    [print(m.name) for m in get_members]
+    blank()
+
+def member_info():
+        pass
 
 def blank():
       print(" ")

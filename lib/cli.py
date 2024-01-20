@@ -9,6 +9,8 @@ from helpers import (
       update_trainer,
       update_member,
       list_members_and_trainers,
+      trainer_info,
+      member_info,
       blank
 )
 
@@ -49,7 +51,7 @@ def trainer_option():
             elif option == "3":
                   remove_trainer()
             elif option == "4":
-                  pass
+                  trainer_info()
             else:
                   print("Please enter a valid number. \n")
             
@@ -76,7 +78,7 @@ def member_options():
             elif option == "4":
                   list_members_and_trainers()
             elif option == "5":
-                  pass
+                  member_info()
             else:
                   print("Please enter a valid number. \n")
             
