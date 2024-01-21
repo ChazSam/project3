@@ -8,16 +8,18 @@ def exit_program():
 
 def list_trainers():
     trainers = Trainer.get_all()
+    blank()
     print("Trainers: ")
-    for i, trainer in enumerate(trainers, start=1) :
-        print(f"{i}. {trainer.name} ")
+    [print(f"{i}. {trainer.name} ") for i, trainer in enumerate(trainers, start=1)]
+        
 
 
 def list_members():
     members = Member.get_all()
+    blank()
     print("Members: ")
-    for i, member in enumerate(members, start=1) :
-        print(f"{i}. {member.name} ")
+    [print(f"{i}. {member.name} ") for i, member in enumerate(members, start=1)]
+        
 
 
 def create_trainer():
@@ -51,30 +53,37 @@ def create_member():
         
 
 def remove_trainer():
-    list_trainers()
+    trainers = Trainer.get_all()
+    [print(f"{i}. {trainer.name} ") for i, trainer in enumerate(trainers, start=1) ]
+        
     blank()
+
     try:
-        id_ = int(input("Enter trainers number you want to remove: "))
+        choice = int(input("Enter trainers number you want to remove: "))
     except ValueError:
         print("Please enter a number.")
-    if trainer := Trainer.find_by_id(id_):
-        reassign_Members(trainer)
 
-        trainer.delete()
-        print(f"Trainer deleted")
+    if 1 <= choice <= len(trainers):
+        selected_trainer = trainers[choice -1]
+        reassign_Members(selected_trainer)
+        selected_trainer.delete()
+        print("Trainer deleted")
     else:
-        print(f'Trainer not found')
+        print("Trainer not found")
 
 
 def remove_member():
-    list_members()
+    members = Member.get_all()
+    [ print(f"{i}. {member.name} ") for i, member in enumerate(members, start=1)]
     blank()
     try:
-        id_ = int(input("Enter member's number you want to remove: "))
+        choice = int(input("Enter member's number you want to remove: "))
     except ValueError:
         print("Please enter a number.")
-    if member := Member.find_by_id(id_):
-        member.delete()
+
+    if 1 <= choice <= len(members):
+        selected_member = members[choice-1]
+        selected_member.delete()
         print(f"Member removed")
     else:
         print(f'Member not found')
@@ -136,28 +145,34 @@ def list_members_and_trainers():
 
 def reassign_Members(trainer):
     get_members = trainer.members()
-    for i in get_members:
-        print(f"{i.name} is assigned to {trainer.name}, Please reassign the member to another trainer.")
+    for member in get_members:
+        print(f"{member.name} is assigned to {trainer.name}, Please reassign the member to another trainer.")
         trainer_list = Trainer.get_all()
 
-        [print(f"{t.id}. {t.name}") for t in trainer_list if t.name != trainer.name]
+        if trainer in trainer_list:
+            trainer_list.remove(trainer)
+
+        [print(f"{i}. {trainer.name}") for i, trainer in enumerate(trainer_list, start=1)]
 
         choice = int(input("Select which trainer to replace the previous \n"))
 
-        for y in trainer_list:        
-            if choice == y.id:
-                i.trainer_id = choice
-                i.update()
-                print("Member's trainer updated")
-                break
+        if 1 <= choice <= len(trainer_list):
+            selected_trainer = trainer_list[choice-1]
+            member.trainer_id = selected_trainer.id
+            member.update()
+            print(f"Member: {member.name} trainer has been updated")
+
         else:
             print ("Trainer does not exist")
+            remove_trainer()
+
+
 
 
 def trainer_info():
     trainers = Trainer.get_all()
-    for i, trainer in enumerate(trainers, start=1) :
-        print(f"{i}. {trainer.name} ")
+    [print(f"{i}. {trainer.name} ") for i, trainer in enumerate(trainers, start=1)]
+        
     try:
         choice = int(input("Select a trainer for all info: \n"))
     except ValueError:
@@ -175,19 +190,22 @@ def trainer_info():
 
 def member_info():
     members = Member.get_all()
-    for i, member in enumerate(members, start=1) :
-        print(f"{i}. {member.name} ")
+    [ print(f"{i}. {member.name} ") for i, member in enumerate(members, start=1)]
+        
 
     try:
         choice = int(input("Select a trainer for all info: \n"))
     except ValueError:
         print("Please enter a number.")
 
-    selected_member = members[choice-1]
-    get_trainer = Trainer.find_by_id(selected_member.trainer_id)
+    if 1 <= choice <= len(members):
+        selected_member = members[choice-1]
+        get_trainer = Trainer.find_by_id(selected_member.trainer_id)
 
-    print(f"{selected_member.name} {selected_member.age} {selected_member.goals}\nTrainer - {get_trainer.name}")
-    blank()
+        print(f"{selected_member.name} {selected_member.age} {selected_member.goals}\nTrainer - {get_trainer.name}")
+        blank()
+    else:
+        print("Member not found")
 
 
 def blank():
