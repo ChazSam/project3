@@ -106,7 +106,6 @@ class Member:
         CONN.commit()
 
     def delete(self):
-        breakpoint()
         sql = """DELETE FROM members WHERE id = ?"""
 
         CURSOR.execute(sql, (self.id,))

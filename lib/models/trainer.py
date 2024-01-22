@@ -27,7 +27,7 @@ class Trainer:
     @work_days.setter
     def work_days(self, work_days):
         lst = ["M","T","W","H","F","S","U"]
-        if isinstance(work_days, str) and all(i in lst for i in work_days):
+        if isinstance(work_days, str) and all(i in lst for i in work_days) and len(work_days):
             self._work_days = work_days
         else:
             raise ValueError ("Please enter days with letters and no commas (MTWHFSU)")
