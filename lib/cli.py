@@ -63,8 +63,8 @@ def member_options():
                               "1. Add Member \n"
                               "2. Update Member \n"
                               "3. Remove Member \n"
-                              "4. List Members with Trainers \n"
-                              "5. get all info for selected member including trainer name \n"
+                              "4. List all Members with Trainers \n"
+                              "5. List all infomation for a member \n"
                               "0. Back \n")
 
             if option == "0":

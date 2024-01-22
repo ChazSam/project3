@@ -1,4 +1,5 @@
 from models.__init__ import CURSOR, CONN
+from models.trainer import Trainer
 
 class Member:
 
@@ -50,7 +51,8 @@ class Member:
     
     @trainer_id.setter
     def trainer_id(self, trainer_id):
-        if isinstance(trainer_id, int):
+        trainer_list = Trainer.get_all()
+        if isinstance(trainer_id, int) and 1 <= trainer_id <= len(trainer_list):
             self._trainer_id = trainer_id
         else:
             raise ValueError("Member must be assigned a trainer.")
