@@ -156,6 +156,9 @@ def update_member():
                         except ValueError:
                             print("Please enter a number.")                   
 
+                    else:
+                        print(f"Member not found")
+                        
                 except ValueError:
                     print("Please enter a valid number.")
 
@@ -168,7 +171,7 @@ def update_member():
     except ValueError:
         print("Please enter a number\n")
     
-    
+
 def list_members_and_trainers(): 
     members = Member.get_all()
     for i, member  in enumerate(members, start=1):
