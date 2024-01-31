@@ -55,6 +55,7 @@ def trainer_option():
             else:
                   print("Please enter a valid number. \n")
             
+            
 def member_options():
       while True:
             list_members()

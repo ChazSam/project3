@@ -60,7 +60,7 @@ def remove_trainer():
 
         if 1 <= choice <= len(trainers):
             selected_trainer = trainers[choice -1]
-            reassign_Members(selected_trainer)
+            reassign_members(selected_trainer)
             selected_trainer.delete()
             print("Trainer deleted")
         else:
@@ -115,11 +115,11 @@ def update_trainer():
     except ValueError:
         print("Please enter a number\n")
 
+
 def update_member():
     members = Member.get_all()
     [ print(f"{i}. {member.name} ") for i, member in enumerate(members, start=1)]
     blank()
-
 
     try:
         choice = int(input("Enter member's number you want to update: "))
@@ -158,7 +158,7 @@ def update_member():
 
                     else:
                         print(f"Member not found")
-                        
+
                 except ValueError:
                     print("Please enter a valid number.")
 
@@ -179,7 +179,7 @@ def list_members_and_trainers():
         print(f"{i}. {member.name} - Trainer: {trainer.name}")
 
 
-def reassign_Members(trainer):
+def reassign_members(trainer):
     get_members = trainer.members()
     for member in get_members:
         print(f"{member.name} is assigned to {trainer.name}, Please reassign the member to another trainer.")
@@ -229,6 +229,7 @@ def trainer_info():
     except ValueError:
         print("Please enter a number.")
 
+
 def member_info():
     members = Member.get_all()
     [ print(f"{i}. {member.name} ") for i, member in enumerate(members, start=1)]
@@ -247,6 +248,7 @@ def member_info():
 
     except ValueError:
         print("Please enter a number.")
+
 
 def blank():
       print(" ")
