@@ -39,7 +39,7 @@ def create_member():
     goals = input("Enter the members goals\n")
     list_trainers()
     try:
-        trainer = int(input("enter a number to assign a trainer: \n"))
+        trainer = int(input("Enter a number to assign a trainer: \n"))
     except ValueError:
         print("Please enter a number.")
 
@@ -99,9 +99,9 @@ def update_trainer():
             selected_trainer = trainers[choice -1]
 
             try:
-                name = input("Enter Trainer's Name: \n")
+                name = input("Enter a trainer's full name: \n")
                 selected_trainer.name = name
-                work_days = input("Enter work_days: \n")
+                work_days = input("Enter the days the trainer is working (enter MTWHFSU, no spaces): \n")
                 selected_trainer.work_days = work_days.upper()
                 selected_trainer.update()
                 print(f"{selected_trainer.name} updated")
@@ -128,10 +128,10 @@ def update_member():
             selected_member = members[choice-1]
 
             try:
-                name = input("Enter Members Name: \n")
+                name = input("Enter a Members's full name \n")
                 selected_member.name = name
                 try:
-                    age = int(input("Enter Members Age: \n"))
+                    age = int(input("Enter the members age (members must be 18+) \n"))
                 except ValueError:
                     print("Please enter a number.")
                 selected_member.age = age
@@ -143,7 +143,7 @@ def update_member():
                 blank()
 
                 try:
-                    choice = int(input("enter a number to assign a trainer: \n"))
+                    choice = int(input("Enter a number to assign a trainer: \n"))
 
                     if 1 <= choice <= len(trainers):
                         selected_trainer = trainers[choice -1]
