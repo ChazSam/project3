@@ -16,7 +16,7 @@ from helpers import (
 
 def main():
       while True:
-            option = input("Welcome to Trainer App. Please enter a number for:\n\n" 
+            option = input("Welcome to Trainer Assignment App. Please enter a number for:\n\n" 
             "1. Select Trainers \n"
             "2. Select Members\n"
             "0. Quit\n")
@@ -33,13 +33,13 @@ def main():
 
 def trainer_option():
       while True:
-            list_trainers()
+            #list_trainers()
             blank()
             option = input("Enter what you would like to do: \n"
-                              "1. Add Trainer \n"
-                              "2. Update Trainer \n"
-                              "3. Remove Trainer \n"
-                              "4. Select trainer info and members assigned \n"
+                              "1. Add a Trainer \n"
+                              "2. Update a Trainer info \n"
+                              "3. Remove a Trainer \n"
+                              "4. Display a Trainer's info with Members assigned to the Trainer \n"
                               "0. Back\n")
 
             if option == "0":
@@ -58,14 +58,14 @@ def trainer_option():
             
 def member_options():
       while True:
-            list_members()
+            #list_members()
             blank()
             option = input("Enter what you would like to do: \n"
-                              "1. Add Member \n"
-                              "2. Update Member \n"
-                              "3. Remove Member \n"
+                              "1. Add a Member \n"
+                              "2. Update a Member \n"
+                              "3. Remove a Member \n"
                               "4. List all Members with Trainers \n"
-                              "5. List all infomation for a member \n"
+                              "5. List all infomation for a Member \n"
                               "0. Back \n")
 
             if option == "0":

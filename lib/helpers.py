@@ -51,6 +51,8 @@ def create_member():
         
 
 def remove_trainer():
+    blank()
+    print("Trainers: ")
     trainers = Trainer.get_all()
     [print(f"{i}. {trainer.name} ") for i, trainer in enumerate(trainers, start=1) ]
     blank()
@@ -117,6 +119,7 @@ def update_trainer():
 
 
 def update_member():
+    print("Members: ")
     members = Member.get_all()
     [ print(f"{i}. {member.name} ") for i, member in enumerate(members, start=1)]
     blank()
@@ -174,6 +177,8 @@ def update_member():
 
 def list_members_and_trainers(): 
     members = Member.get_all()
+    blank()
+    print("Members: ")
     for i, member  in enumerate(members, start=1):
         trainer = Trainer.find_by_id(member.trainer_id)
         print(f"{i}. {member.name} - Trainer: {trainer.name}")
@@ -209,6 +214,7 @@ def reassign_members(trainer):
 
 def trainer_info():
     trainers = Trainer.get_all()
+    print("Trainers: ")
     [print(f"{i}. {trainer.name} ") for i, trainer in enumerate(trainers, start=1)]
         
     try:
@@ -221,8 +227,10 @@ def trainer_info():
             print(f"Trainer: \n"
                 f"{selected_trainer.name}  Work days - {selected_trainer.work_days} \n"
                 "Assigned Members: ")
-            [print(m.name) for m in get_members]
+ 
+            [print(m.name) for m in get_members] if get_members else print("None")
             blank()
+            
         else:
             print("Please enter a valid number")
 
@@ -232,6 +240,7 @@ def trainer_info():
 
 def member_info():
     members = Member.get_all()
+    print("Members: ")
     [ print(f"{i}. {member.name} ") for i, member in enumerate(members, start=1)]
         
     try:
